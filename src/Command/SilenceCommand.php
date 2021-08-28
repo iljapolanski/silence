@@ -62,12 +62,17 @@ class SilenceCommand extends Command
             $input->getOption('maximumChapterDuration')
         );
 
-        $jsonOutput = json_encode(
-            [
-                'timestamp' => (new \DateTime('now'))->format('H:i:s d.m.Y'),
-                'segments' => $this->service->process()
-            ],
-            JSON_PRETTY_PRINT);
+        try {
+            $jsonOutput = json_encode(
+                [
+                    'timestamp' => (new \DateTime('now'))->format('H:i:s d.m.Y'),
+                    'segments' => $this->service->process()
+                ],
+                JSON_PRETTY_PRINT
+            );
+        } catch (\Exception $ex) {
+            return Command::INVALID;
+        }
 
         $this->service->out($jsonOutput);
 

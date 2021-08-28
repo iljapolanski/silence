@@ -9,8 +9,8 @@ class SilenceService
 {
     private KernelInterface $appKernel;
     private string $sourceXmlFilePath;
-    private float $chapterTimout;
-    private float $partTimout;
+    private float $chapterTimeout;
+    private float $partTimeout;
     private float $maxChapterDuration;
 
     public function __construct(KernelInterface $appKernel)
@@ -23,10 +23,10 @@ class SilenceService
         $this->sourceXmlFilePath = $sourceXmlFilePath;
     }
 
-    public function setChapterTimoutParameters(float $chapterTimout, float $partTimout, float $maxChapterDuration): void
+    public function setChapterTimoutParameters(float $chapterTimeout, float $partTimeout, float $maxChapterDuration): void
     {
-        $this->chapterTimout = $chapterTimout;
-        $this->partTimout = $partTimout;
+        $this->chapterTimeout = $chapterTimeout;
+        $this->partTimeout = $partTimeout;
         $this->maxChapterDuration = $maxChapterDuration;
     }
 
@@ -89,7 +89,7 @@ class SilenceService
             $processItem['duration'] = $duration;
             $processItem['totalChapterDuration'] = $currentChapterDuration;
 
-            if ($srcItem['pauseDuration'] >= $this->chapterTimout) {
+            if ($srcItem['pauseDuration'] >= $this->chapterTimeout) {
                 $chapterNum++;
                 if ($partNum === 1) {
                     $processItem['partNum'] = null;
@@ -97,8 +97,8 @@ class SilenceService
                 $partNum = 1;
                 $currentChapterDuration = 0;
             } elseif (
-                ($srcItem['pauseDuration'] >= $this->partTimout) &&
-                ($srcItem['pauseDuration'] < $this->chapterTimout)
+                ($srcItem['pauseDuration'] >= $this->partTimeout) &&
+                ($srcItem['pauseDuration'] < $this->chapterTimeout)
             ) {
                 $partNum++;
             } else {

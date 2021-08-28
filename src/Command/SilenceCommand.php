@@ -30,14 +30,14 @@ class SilenceCommand extends Command
                 null
             )
             ->addOption(
-                'chapterTimout',
+                'chapterTimeout',
                 null,
                 InputOption::VALUE_REQUIRED,
                 'provide timout to start new chapter',
                 2
             )
             ->addOption(
-                'partTimout',
+                'partTimeout',
                 null,
                 InputOption::VALUE_REQUIRED,
                 'provide timout to start new chapter',
@@ -57,8 +57,8 @@ class SilenceCommand extends Command
     {
         $this->service->setSourceXmlFilePath($input->getOption('xmlPath'));
         $this->service->setChapterTimoutParameters(
-            $input->getOption('chapterTimout'),
-            $input->getOption('partTimout'),
+            $input->getOption('chapterTimeout'),
+            $input->getOption('partTimeout'),
             $input->getOption('maximumChapterDuration')
         );
 
